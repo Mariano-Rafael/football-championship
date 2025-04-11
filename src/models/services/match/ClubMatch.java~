@@ -1,0 +1,4 @@
+package models.services.match;
+
+public class ClubMatch {
+}

@@ -1,0 +1,68 @@
+package app;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import models.services.match.tournament.Championship;
+import java.io.IOException;
+
+public class NewChampionshipScreenController {
+
+    @FXML
+    private TextField nameTextField;
+
+    @FXML
+    private ComboBox<String> formatComboBox;
+
+    @FXML
+    private Spinner<Integer> teamsPerGroupSpinner;
+
+    @FXML
+    private Spinner<Integer> qualifiersPerGroupSpinner;
+
+    private Championship championship;
+
+    @FXML
+    protected void handleCreateChampionship(ActionEvent event) throws IOException {
+        String name = nameTextField.getText();
+        String formatSelecionado = formatComboBox.getValue();
+        int teamsPerGroup = teamsPerGroupSpinner.getValue();
+        int qualifiersPerGroup = qualifiersPerGroupSpinner.getValue();
+
+        System.out.println("Nome do Campeonato: " + name);
+        System.out.println("Formato: " + formatSelecionado);
+        System.out.println("Times por Grupo: " + teamsPerGroup);
+        System.out.println("Classificados por Grupo: " + qualifiersPerGroup);
+
+        championship = new Championship(name);
+
+        if ("Grupos e Mata-Mata".equals(formatSelecionado)) {
+            championship.setFormat("GroupsAndKnockout");
+            championship.setTeamsPerGroup(teamsPerGroup);
+            championship.setQualifiersPerGroup(qualifiersPerGroup);
+        } else if ("Mata-Mata".equals(formatSelecionado)) {
+            championship.setFormat("Knockout");
+        }
+
+        loadAddTeamsScreen(event);
+    }
+
+    private void loadAddTeamsScreen(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/personal/app_football_championship/view/add-teams-screen.fxml"));
+        Parent addTeamsRoot = fxmlLoader.load();
+
+        AddTeamsScreenController controller = fxmlLoader.getController();
+        controller.setChampionship(championship);
+
+        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(addTeamsRoot, 600, 400);
+        stage.setScene(scene);
+        stage.show();
+    }
+}

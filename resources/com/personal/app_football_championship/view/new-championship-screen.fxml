@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+<GridPane hgap="10.0" vgap="10.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="app.NewChampionshipScreenController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+    <Label text="Nome do Campeonato:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+    <TextField fx:id="nameTextField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+    <Label text="Formato:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+    <ComboBox fx:id="formatComboBox" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="Grupos e Mata-Mata" />
+                <String fx:value="Mata-Mata" />
+            </FXCollections>
+        </items>
+    </ComboBox>
+    <Label text="Times por Grupo:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+    <Spinner fx:id="teamsPerGroupSpinner" GridPane.columnIndex="1" GridPane.rowIndex="2" initialValue="4" min="2" max="10" editable="true" />
+    <Label text="Classificados por Grupo:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+    <Spinner fx:id="qualifiersPerGroupSpinner" GridPane.columnIndex="1" GridPane.rowIndex="3" initialValue="2" min="1" max="5" editable="true" />
+    <Button text="Criar Campeonato" onAction="#handleCreateChampionship" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.halignment="RIGHT" />
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints vgrow="SOMETIMES" />
+        <RowConstraints vgrow="SOMETIMES" />
+        <RowConstraints vgrow="SOMETIMES" />
+        <RowConstraints vgrow="SOMETIMES" />
+        <RowConstraints vgrow="SOMETIMES" />
+    </rowConstraints>
+</GridPane>
